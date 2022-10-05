@@ -1,4 +1,3 @@
-import Drive from '@ioc:Adonis/Core/Drive';
 
 import Student from '../Models/Student';
 import { BaseServices } from './BaseServices';
@@ -17,32 +16,32 @@ export default class FileServices extends BaseServices {
   }
 
 
-   async updateFileStudent(files:any){
-    const s3 = Drive.use('s3')
+   async updateFileStudent(){
+   // const s3 = Drive.use('s3')
 
 
     // files.map(async (file) =>{
     // })3
 
-    const arquivo =  await files.moveToDisk('pilates', {
-      name: `teste.${files.extname}`
-    },'s3')
+    // const arquivo =  await files.moveToDisk('pilates', {
+    //   name: `teste.${files.extname}`
+    // },'s3')
 
-    for (let file of files) {
-      try{
-
-
+    // for (let file of files) {
+    //   try{
 
 
-      }catch(err){
-      console.log(err)
-      }
-      // const path = this.rename(file.extname)
-      // const result = await file.move(Application.tmpPath('uploads'))
-      // await s3.put(`/${path}`, file.tmpPath)
 
-      //console.log(result)
-    }
+
+    //   }catch(err){
+    //   console.log(err)
+    //   }
+    //   // const path = this.rename(file.extname)
+    //   // const result = await file.move(Application.tmpPath('uploads'))
+    //   // await s3.put(`/${path}`, file.tmpPath)
+
+    //   //console.log(result)
+    // }
 
   }
 }

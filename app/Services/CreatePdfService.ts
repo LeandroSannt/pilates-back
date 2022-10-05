@@ -1,13 +1,13 @@
-import Application from '@ioc:Adonis/Core/Application';
+//import Application from '@ioc:Adonis/Core/Application';
 import { DataFinancialReportProps } from 'App/interfaces';
-import fs from 'fs';
+//import fs from 'fs';
 import moment from 'moment';
 import PDFPrinter from 'pdfmake';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
 
 export class PdfService{
 
-  createPdf(data:DataFinancialReportProps,response:any,callback:any)  {
+  createPdf(data:DataFinancialReportProps)  {
     var fonts = {
       Courier: {
         normal: 'Courier',
@@ -89,13 +89,13 @@ export class PdfService{
        }
     }
 
-    const chuncks:any = []
+    //const chuncks:any = []
 
     const pdfDoc = pdf.createPdfKitDocument(docDefinitions)
 
-    const filePath = Application.tmpPath(`reports/${moment().format('DDMMYYYYhhmm')}-report.pdf`)
+    //const filePath = Application.tmpPath(`reports/${moment().format('DDMMYYYYhhmm')}-report.pdf`)
 
-    const c = pdfDoc.pipe(fs.createWriteStream(filePath))
+   // const c = pdfDoc.pipe(fs.createWriteStream(filePath))
 
     // pdfDoc.on('data',(chunk) =>{
     //   chuncks.push(chunk)

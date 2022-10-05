@@ -1,4 +1,3 @@
-import Database from '@ioc:Adonis/Lucid/Database';
 import { getExpirationStudent } from 'App/Helpers/getExpirationStudent';
 import { DataFinancialReportProps } from 'App/interfaces';
 import moment from 'moment';
@@ -80,21 +79,13 @@ export default class ReportServices {
   }
 
 
-  async birthDateMonth(date:string){
-    const student = await Student.query()
-    // .raw()
-    .whereJson('birth_date',
-    Database
-    .raw('select *')
-    )
-  }
 
 
-  async donwloadPdfFinancial(response:any){
+  async donwloadPdfFinancial(){
       const pdfService = new PdfService()
       const pdf = await this.financialReport()
 
-      const result = await pdfService.createPdf(pdf.data as unknown as DataFinancialReportProps,response)
+      const result = await pdfService.createPdf(pdf.data as unknown as DataFinancialReportProps)
 
       return result
 

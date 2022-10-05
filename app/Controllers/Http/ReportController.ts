@@ -13,8 +13,8 @@ export default class ReportController {
   }
 
   async downloadfinancial({response}:HttpContextContract){
-    const studentService = new ReportServices()
-    const filePath = await studentService.donwloadPdfFinancial(response)
+    //const studentService = new ReportServices()
+    //const filePath = await studentService.donwloadPdfFinancial(response)
 
     //const image = fs.createReadStream('tmp/reports/report.pdf')
 
