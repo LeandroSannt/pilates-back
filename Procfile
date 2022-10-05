@@ -1,4 +1,5 @@
-web:node ace scheduler:run
 
-web: node build/server.js
+web: yarn build
 release: node build/ace migration:run --force
+
+# web:node ace scheduler:run
