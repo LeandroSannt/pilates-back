@@ -28,6 +28,7 @@ export default class CreatePlanValidator {
     value:schema.number(),
     name_plan:schema.string(),
     amount_installments:schema.number(),
+    percent_rate:schema.number.nullableAndOptional(),
 
   })
 
