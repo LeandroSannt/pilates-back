@@ -1,5 +1,6 @@
 import Student from 'App/Models/Student';
 import StudentGang from 'App/Models/StudentGang';
+
 import Gang from '../Models/Gang';
 import { BaseServices } from './BaseServices';
 
@@ -82,6 +83,18 @@ export default class GangsServices extends BaseServices {
     return {
       data:create,
       status:201,
+    }
+  }
+
+  async deleteStudentForGang(student_id:number,gang_id:number){
+    await StudentGang.query()
+    .where({student_id})
+    .andWhere({gang_id})
+    .delete()
+
+    return {
+      data:'Aluno removido',
+      status:200
     }
   }
 }

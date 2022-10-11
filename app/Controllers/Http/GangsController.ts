@@ -35,4 +35,12 @@ async addStudentGang({request,response}:HttpContextContract){
 
   return response.status(result.status).json(result.data)
 }
+
+async deleteStudentGang({request,response}:HttpContextContract){
+  const {gang_id,student_id} = await request.validate(AddStudentGangValidator)
+  const gangs = new GangsServices()
+  const result = await gangs.deleteStudentForGang(student_id,gang_id)
+
+  return response.status(result.status).json(result.data)
+}
 }

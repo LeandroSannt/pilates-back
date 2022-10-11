@@ -33,6 +33,7 @@ Route.group(()=>{
   Route.post('/gangs/store-many', 'GangsController.storeMany').middleware('validateGang')
   Route.get('/gangStudents/get-gang-students', 'GangsController.getGangsStudent')
   Route.post('/gangStudents/add-gang-students', 'GangsController.addStudentGang')
+  Route.delete('/gangStudents/delete-gang-students', 'GangsController.deleteStudentGang')
 })
 
 Route.group(() =>{
