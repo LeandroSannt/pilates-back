@@ -26,7 +26,7 @@ export default class FilesController {
     }
 
     if(files){
-      await fileServices.updateFileStudent(files)
+      await fileServices.updateFileStudent()
     }
   }
 }
