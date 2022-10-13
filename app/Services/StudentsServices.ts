@@ -1,7 +1,8 @@
 import moment from 'moment';
-import { getExpirationStudent } from './../Helpers/getExpirationStudent';
 
 import Student from '../Models/Student';
+import { getExpirationStudent } from './../Helpers/getExpirationStudent';
+import { updateCurrentMonth } from './../Helpers/updateCurrentMonth';
 import { BaseServices } from './BaseServices';
 
 interface StoreStudent{
@@ -23,6 +24,8 @@ export default class StudentsServices extends BaseServices {
 
   async listStudentsPaginated(page:number,limit:number,status:string,planId:string,name:string){
     moment.locale('pt-BR');
+
+    await updateCurrentMonth()
 
     let students = await Student
     .query()
@@ -53,8 +56,6 @@ export default class StudentsServices extends BaseServices {
       }
     ])
     .paginate(page, limit)
-
-
 
     const studentExpiration = students.toJSON().data.map((student) =>{
       const expiration_date = getExpirationStudent(student as any)
