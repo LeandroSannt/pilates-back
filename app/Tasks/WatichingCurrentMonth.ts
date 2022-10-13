@@ -7,7 +7,7 @@ moment.locale('pt-br')
 
 export default class WatichingCurrentMonth extends BaseTask {
 	public static get schedule() {
-		return '10 * * * * *'
+		return '1 * * * * *'
 	}
 	/**
 	 * Set enable use .lock file for block run retry task
