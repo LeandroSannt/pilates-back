@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder';
 import GangLack from 'App/Models/GangLack';
 import moment from 'moment';
+
 import { } from '../../app/interfaces';
 
 export default class extends BaseSeeder {
@@ -14,7 +15,7 @@ export default class extends BaseSeeder {
       return {
         gang_id:Math.floor(Math.random() * 7) + 1,
         student_id:Math.floor(Math.random() * 25) + 1,
-        date:moment(faker.date.recent()).format(),
+        date_lacks:moment(faker.date.recent()).format(),
         observation:faker.lorem.text()
       };
     }

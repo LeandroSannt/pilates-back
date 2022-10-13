@@ -1,13 +1,14 @@
 import { BaseTask } from 'adonis5-scheduler/build';
 import { getExpirationStudent } from 'App/Helpers/getExpirationStudent';
 import moment from 'moment';
+
 import Student from '../Models/Student';
 
 moment.locale('pt-br')
 
 export default class WatichingCurrentMonth extends BaseTask {
 	public static get schedule() {
-		return '* 1 0 * * *'
+		return '* /10 * * * *'
 	}
 	/**
 	 * Set enable use .lock file for block run retry task

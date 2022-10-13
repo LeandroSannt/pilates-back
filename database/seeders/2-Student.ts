@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder';
 import Student from 'App/Models/Student';
 import moment from 'moment';
+
 import { } from '../../app/interfaces';
 
 export default class extends BaseSeeder {
@@ -22,7 +23,7 @@ export default class extends BaseSeeder {
         status:"ativo",
         objective:faker.lorem.text(),
         plan_id:Math.floor(Math.random() * 4) + 1,
-        plan_expiration_day:(Math.floor(Math.random() * 31) + 1).toString()
+        plan_expiration_day:faker.date.recent()
       };
     }
 
