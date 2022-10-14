@@ -23,7 +23,8 @@ export default class extends BaseSeeder {
         status:"ativo",
         objective:faker.lorem.text(),
         plan_id:Math.floor(Math.random() * 4) + 1,
-        plan_expiration_day:faker.date.recent()
+        plan_expiration_day:faker.date.recent(),
+        date_start_plan:new Date()
       };
     }
 

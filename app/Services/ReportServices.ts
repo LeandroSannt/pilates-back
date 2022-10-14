@@ -1,8 +1,8 @@
-import { getExpirationStudent } from 'App/Helpers/getExpirationStudent';
 import { DataFinancialReportProps } from 'App/interfaces';
 import moment from 'moment';
 
 import Student from '../Models/Student';
+import { countMonths } from './../Helpers/countMonths';
 import { PdfService } from './CreatePdfService';
 
 export default class ReportServices {
@@ -39,9 +39,9 @@ export default class ReportServices {
 
 
     const studentExpiration = students.map((student) =>{
-      const expiration_date = getExpirationStudent(student as any)
+      const currentMonth =  countMonths({end:student.plan_expiration_day,date_start_plan:student.date_start_plan})
       const studentReport = {
-        expiration_date,
+        expiration_date:currentMonth,
         //calc_amount_receivable: this.calcAmountReceivable(student.plan.value),
         calc_amount_receivable:this.calcAmountReceivable(student.plan.value),
         total_percent_rate:this.calcPercentRate(student.plan.value,student.plan.amount_installments,student.plan.percent_rate),
@@ -50,7 +50,6 @@ export default class ReportServices {
 
       return studentReport
     })
-
     var sum_percent_rate = studentExpiration.reduce(function(soma, atual) {
       return soma + atual.total_percent_rate
     }, 0)

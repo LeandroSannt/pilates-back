@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 import Student from '../Models/Student';
-import { getExpirationStudent } from './../Helpers/getExpirationStudent';
+import { countMonths } from './../Helpers/countMonths';
 import { updateCurrentMonth } from './../Helpers/updateCurrentMonth';
 import { BaseServices } from './BaseServices';
 
@@ -58,9 +58,11 @@ export default class StudentsServices extends BaseServices {
     .paginate(page, limit)
 
     const studentExpiration = students.toJSON().data.map((student) =>{
-      const expiration_date = getExpirationStudent(student as any)
-      const studentExpiration = {expiration_date,...student.toJSON()}
-
+      const currentMonth =  countMonths({end:student.plan_expiration_day,date_start_plan:student.date_start_plan})
+      const studentExpiration = {
+        expiration_date:currentMonth >  student.plan.amount_installments ? student.plan.amount_installments : currentMonth,
+        ...student.toJSON()
+      }
       return studentExpiration
     })
 
@@ -80,7 +82,8 @@ export default class StudentsServices extends BaseServices {
     const store = await this.Model.create({
       ...data,
       current_month_plan:1,
-      status:"ativo"
+      status:"ativo",
+      date_start_plan:new Date()
     })
 
     return {
@@ -93,7 +96,7 @@ export default class StudentsServices extends BaseServices {
     await Student.
       query()
       .where('id',id)
-      .update({current_month_plan:1,status:'ativo'})
+      .update({date_start_plan:new Date(),status:'ativo'})
 
       return {
         data:1,

@@ -22,6 +22,9 @@ export default class Student extends BaseModel {
   public telephone: string
 
   @column()
+  public date_start_plan: string
+
+  @column()
   public telephone_emergency: string
 
   @column()
