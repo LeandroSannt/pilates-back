@@ -47,4 +47,14 @@ export default class StudentsController extends BaseController  {
     return response.status(result.status).json(result.data)
 
   }
+
+  async updateStudent({request,response,params}:HttpContextContract){
+    const data = await request.validate(UpdateStudentValidator)
+    const {id} = params
+
+    const studentService = new StudentsServices()
+    const result = await studentService.updateStudent(id,data)
+
+    return response.status(result.status).json(result.data)
+  }
 }

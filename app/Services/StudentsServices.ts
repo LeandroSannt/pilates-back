@@ -48,7 +48,7 @@ export default class StudentsServices extends BaseServices {
     .orderBy([
       {
         column: 'status',
-        order: 'desc',
+        order: 'asc',
       },
       {
         column: 'id',
@@ -57,18 +57,30 @@ export default class StudentsServices extends BaseServices {
     ])
     .paginate(page, limit)
 
-    const studentExpiration = students.toJSON().data.map((student) =>{
+    const studentExpiration =
+    Promise.all(
+     students.toJSON().data.map(async (student) =>{
       const currentMonth =  countMonths({end:student.plan_expiration_day,date_start_plan:student.date_start_plan,total:student.plan.amount_installments})
       const studentExpiration = {
         expiration_date:currentMonth >  student.plan.amount_installments ? student.plan.amount_installments : currentMonth,
         ...student.toJSON()
       }
+
+      if(student.plan_expiration_day < moment().format()){
+        await Student.query().where({id:student.id}).update({status:'vencido'})
+      }
+
+      if(moment().format('DD/MM/YYYY') === moment(student.plan_expiration_day).subtract(7, 'days').format('DD/MM/YYYY')){
+        await Student.query().where({id:student.id}).update({status:'a vencer'})
+      }
+
       return studentExpiration
-    })
+    }))
+
 
     const newStudent = {
       meta:students.getMeta(),
-      data:studentExpiration
+      data:await studentExpiration
     }
 
     return {
@@ -90,6 +102,32 @@ export default class StudentsServices extends BaseServices {
     return {
       data:store,
       status:200,
+    }
+  }
+
+  async updateStudent(id:number,data:StoreStudent):Promise<{data:any,status:number}>{
+    const student = await Student.find(id)
+
+    if(student){
+      const sevenAfeterDays =  moment(student.plan_expiration_day).subtract(7, 'days').format('DD/MM/YYYY')
+      const currentDate = moment().format('DD/MM/YYYY')
+      if(currentDate < sevenAfeterDays){
+        await Student.query().where({id}).update({
+          ...data,
+         status:  'a vencer'
+        })
+      }else{
+        await Student.query().where({id}).update({
+          ...data,
+        })
+      }
+    }
+
+    //so posso atualizar para ativo se a data for menor que a dos 7 dias
+
+    return {
+      data:student,
+      status:204
     }
   }
 

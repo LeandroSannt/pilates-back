@@ -43,7 +43,7 @@ Route.group(() =>{
   Route.post('students/', 'StudentsController.store')
   Route.put('/students/:id', 'StudentsController.update')
   Route.delete('/students/:id', 'StudentsController.destroy')
-
+  Route.put('/students/:id/updateStatus', 'StudentsController.updateStudent')
   Route.post('/students/store-current-month', 'StudentsController.storeStudent')
   Route.patch('/students/renovation-plan', 'StudentsController.renovationPlan')
 })
