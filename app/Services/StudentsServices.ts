@@ -75,7 +75,7 @@ export default class StudentsServices extends BaseServices {
         await Student.query().where({id:student.id}).update({status:'vencido'})
       }
 
-      if(moment().format('DD/MM/YYYY') === moment(student.plan_expiration_day).subtract(7, 'days').format('DD/MM/YYYY')){
+      if(moment().format('DD/MM/YYYY') > moment(student.plan_expiration_day).subtract(7, 'days').format('DD/MM/YYYY')){
         await Student.query().where({id:student.id}).update({status:'a vencer'})
       }
 
