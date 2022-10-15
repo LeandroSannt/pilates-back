@@ -36,7 +36,6 @@ export default class UpdateStudentValidator {
       rules.exists({table:'plans',column:"id"})
     ]),
     plan_expiration_day:schema.string(),
-    date_start_plan:schema.string(),
  })
 
   /**
