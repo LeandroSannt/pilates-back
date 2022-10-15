@@ -14,7 +14,7 @@ interface StoreStudent{
   birth_date?: string | null;
   objective?: string | null;
   plan_id: number;
-  plan_expiration_day: string;
+  plan_expiration_day?: string | null;
 }
 
 export default class StudentsServices extends BaseServices {
