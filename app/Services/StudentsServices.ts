@@ -52,7 +52,7 @@ export default class StudentsServices extends BaseServices {
       },
       {
         column: 'updated_at',
-        order: 'desc',
+        order: 'asc',
       },
       {
         column: 'id',
