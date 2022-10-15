@@ -46,24 +46,10 @@ export default class StudentsServices extends BaseServices {
         query.whereLike('name', `%${name}%`)
       }
     })
-    .orderBy([
-       {
-        column: 'status',
-        order: 'asc',
-       }
-      // {
-      //   column: 'updated_at',
-      //   order: 'asc',
-      // },
-      // {
-      //   column: 'id',
-      //   order: 'desc',
-      // },
-    ])
+    .orderBy('status', 'asc')
     .paginate(page, limit)
 
-    const studentExpiration =
-    Promise.all(
+    const studentExpiration =Promise.all(
      students.toJSON().data.map(async (student) =>{
       const currentMonth =  countMonths({end:student.plan_expiration_day,date_start_plan:student.date_start_plan,total:student.plan.amount_installments})
       const studentExpiration = {
@@ -71,14 +57,18 @@ export default class StudentsServices extends BaseServices {
         ...student.toJSON()
       }
 
-      if(student.plan_expiration_day < moment().format()){
+
+      const current = new Date()
+      const expirationDate = new Date(student.plan_expiration_day)
+      const sevenDaysPrev = new Date(moment(student.plan_expiration_day).subtract(7, 'days').format())
+
+      if(current > expirationDate){
         await Student.query().where({id:student.id}).update({status:'vencido'})
-      }
-
-      if(moment().format('DD/MM/YYYY') > moment(student.plan_expiration_day).subtract(7, 'days').format('DD/MM/YYYY')){
+      }else if( current > sevenDaysPrev  &&  current < expirationDate ){
         await Student.query().where({id:student.id}).update({status:'a vencer'})
+      }else{
+        await Student.query().where({id:student.id}).update({status:'ativo'})
       }
-
       return studentExpiration
     }))
 
