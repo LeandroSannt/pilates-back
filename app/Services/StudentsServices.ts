@@ -58,7 +58,7 @@ export default class StudentsServices extends BaseServices {
     .paginate(page, limit)
 
     const studentExpiration = students.toJSON().data.map((student) =>{
-      const currentMonth =  countMonths({end:student.plan_expiration_day,date_start_plan:student.date_start_plan})
+      const currentMonth =  countMonths({end:student.plan_expiration_day,date_start_plan:student.date_start_plan,total:student.plan.amount_installments})
       const studentExpiration = {
         expiration_date:currentMonth >  student.plan.amount_installments ? student.plan.amount_installments : currentMonth,
         ...student.toJSON()
@@ -83,7 +83,8 @@ export default class StudentsServices extends BaseServices {
       ...data,
       current_month_plan:1,
       status:"ativo",
-      date_start_plan:new Date()
+      date_start_plan:new Date(),
+
     })
 
     return {
