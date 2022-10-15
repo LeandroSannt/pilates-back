@@ -45,7 +45,7 @@ export default class ReportServices {
         expiration_date:currentMonth >  student.plan.amount_installments ? student.plan.amount_installments : currentMonth,
         //calc_amount_receivable: this.calcAmountReceivable(student.plan.value),
         calc_amount_receivable:this.calcAmountReceivable(student.plan.value),
-        total_percent_rate: currentMonth > 1 ? 0 :
+        total_percent_rate: currentMonth > 1 || currentMonth === 0 ? 0 :
         student.plan.amount_installments === 1 ? 0 :
         this.calcPercentRate(student.plan.value,student.plan.amount_installments,student.plan.percent_rate)
          ,
