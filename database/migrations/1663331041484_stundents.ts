@@ -13,7 +13,7 @@ export default class extends BaseSchema {
       table.string('telephone_emergency')
       table.string('birth_date')
       table.integer('plan_id').notNullable().unsigned().references('id').inTable('plans')
-      table.string('plan_expiration_day').notNullable()
+      table.string('plan_expiration_day')
       table.integer('current_month_plan').notNullable()
       table.text('objective')
       table.enum('status',['ativo','inativo','a vencer','vencido'])

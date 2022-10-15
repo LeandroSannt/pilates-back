@@ -40,7 +40,7 @@ export default class CreateStudentValidator {
     plan_id:schema.number([
       rules.exists({table:'plans',column:"id"})
     ]),
-    plan_expiration_day:schema.string(),
+    plan_expiration_day:schema.string.nullableAndOptional(),
   })
 
 
