@@ -51,9 +51,13 @@ export default class StudentsServices extends BaseServices {
         order: 'asc',
       },
       {
+        column: 'updated_at',
+        order: 'desc',
+      },
+      {
         column: 'id',
         order: 'desc',
-      }
+      },
     ])
     .paginate(page, limit)
 
