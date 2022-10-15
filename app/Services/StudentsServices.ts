@@ -42,11 +42,12 @@ export default class StudentsServices extends BaseServices {
     })
     .where((query) =>{
       if(name){
+
         query.whereLike('name', `%${name}%`)
       }
     })
     .orderBy([
-      {
+       {
         column: 'status',
         order: 'asc',
        }
@@ -115,7 +116,7 @@ export default class StudentsServices extends BaseServices {
     if(student){
       const sevenAfeterDays =  moment(student.plan_expiration_day).subtract(7, 'days').format('DD/MM/YYYY')
       const currentDate = moment().format('DD/MM/YYYY')
-      if(currentDate < sevenAfeterDays){
+      if(currentDate > sevenAfeterDays){
         await Student.query().where({id}).update({
           ...data,
          status:  'a vencer'
@@ -123,6 +124,7 @@ export default class StudentsServices extends BaseServices {
       }else{
         await Student.query().where({id}).update({
           ...data,
+         status:  'ativo'
         })
       }
     }
