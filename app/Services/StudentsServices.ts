@@ -43,6 +43,16 @@ export default class StudentsServices extends BaseServices {
         query.whereLike('name', `%${name}%`)
       }
     })
+    .orderBy([
+      {
+        column:'status',
+        order:'asc'
+      },
+      {
+        column:'id',
+        order:"desc"
+      }
+    ])
     .paginate(page, limit)
 
     const studentExpiration =Promise.all(
@@ -52,7 +62,6 @@ export default class StudentsServices extends BaseServices {
         expiration_date:currentMonth >  student.plan.amount_installments ? student.plan.amount_installments : currentMonth,
         ...student.toJSON()
       }
-
 
       const current = new Date()
       const expirationDate = new Date(student.plan_expiration_day)
@@ -67,7 +76,6 @@ export default class StudentsServices extends BaseServices {
       }
       return studentExpiration
     }))
-
 
     const newStudent = {
       meta:students.getMeta(),
