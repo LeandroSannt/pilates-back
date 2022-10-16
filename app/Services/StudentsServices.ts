@@ -46,7 +46,7 @@ export default class StudentsServices extends BaseServices {
     .orderBy([
       {
         column:'status',
-        order:'asc'
+        order:'desc'
       },
       {
         column:'id',
