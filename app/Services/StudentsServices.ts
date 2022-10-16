@@ -2,7 +2,6 @@ import moment from 'moment';
 
 import Student from '../Models/Student';
 import { countMonths } from './../Helpers/countMonths';
-import { updateCurrentMonth } from './../Helpers/updateCurrentMonth';
 import { BaseServices } from './BaseServices';
 
 interface StoreStudent{
@@ -25,8 +24,6 @@ export default class StudentsServices extends BaseServices {
   async listStudentsPaginated(page:number,limit:number,status:string,planId:string,name:string){
     moment.locale('pt-BR');
 
-    await updateCurrentMonth()
-
     let students = await Student
     .query()
     .preload('plan')
@@ -46,7 +43,6 @@ export default class StudentsServices extends BaseServices {
         query.whereLike('name', `%${name}%`)
       }
     })
-    .orderBy('status', 'asc')
     .paginate(page, limit)
 
     const studentExpiration =Promise.all(
