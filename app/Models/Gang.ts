@@ -12,6 +12,9 @@ export default class Gang extends BaseModel {
   @column()
   public day: string
 
+  @column()
+  public classe_id: number
+
   @manyToMany(() => Student, {
     pivotTable: 'student_gangs',
     pivotColumns: ['student_id', 'gang_id'],

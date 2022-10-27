@@ -27,10 +27,10 @@ Route.resource('plans', 'PlansController').except(['create', 'edit'])
 Route.group(()=>{
   Route.get('/gangs', 'GangsController.index')
   Route.get('/gangs/:id', 'GangsController.show')
-  Route.post('/gangs/', 'GangsController.store').middleware('validateGang')
-  Route.put('/gangs/:id', 'GangsController.update').middleware('validateGang')
+  Route.post('/gangs/', 'GangsController.store')
+  Route.put('/gangs/:id', 'GangsController.update')
   Route.delete('/gangs/:id', 'GangsController.destroy')
-  Route.post('/gangs/store-many', 'GangsController.storeMany').middleware('validateGang')
+  Route.post('/gangs/store-many', 'GangsController.storeMany')
   Route.get('/gangStudents/get-gang-students', 'GangsController.getGangsStudent')
   Route.post('/gangStudents/add-gang-students', 'GangsController.addStudentGang')
   Route.delete('/gangStudents/delete-gang-students', 'GangsController.deleteStudentGang')
@@ -69,7 +69,13 @@ Route.group(() =>{
 Route.group(() =>{
   Route.get('/report/financial', 'ReportController.financial')
   Route.get('/report/financial-download', 'ReportController.downloadfinancial')
+})
 
+
+Route.group(() =>{
+  Route.post('/classes/storeGangs', 'ClassesController.storeClassGangs').middleware('validateGang')
+  Route.get('/classes/getClasseGangs', 'ClassesController.getClassesGangs')
+  Route.post('/classes/store', 'ClassesController.store')
 })
 
 
