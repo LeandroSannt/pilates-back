@@ -11,10 +11,10 @@ export default class FilesController extends BaseController {
   }
 
   async storeClassGangs({request,response}:HttpContextContract){
-    const {gangs,name,student_id} = await request.validate(CreateClasseValidator)
+    const {gangs,student_id} = await request.validate(CreateClasseValidator)
 
     const classes = new ClassesServices()
-    const result = await classes.storeClassGangsService({gangs,name,student_id})
+    const result = await classes.storeClassGangsService({gangs,student_id})
 
     return response.status(result.status).json(result.data)
 

@@ -5,7 +5,6 @@ import StudentGang from 'App/Models/StudentGang';
 import { BaseServices } from './BaseServices';
 
 interface StoreClasseGang{
-  name:string
   student_id:Array<number>
   gangs:Array<{
     day:string

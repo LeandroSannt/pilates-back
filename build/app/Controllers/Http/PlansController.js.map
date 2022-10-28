@@ -1,1 +1,0 @@
-{"version":3,"file":"PlansController.js","sourceRoot":"","sources":["../../../../app/Controllers/Http/PlansController.ts"],"names":[],"mappings":";;;;;AAAA,mHAAqE;AAErE,iFAAyD;AACzD,sEAA8C;AAE9C,MAAqB,eAAgB,SAAQ,wBAAc;IACzD;QACE,KAAK,CAAC;YACJ,OAAO,EAAC,uBAAa;YACrB,SAAS,EAAC,EAAC,MAAM,EAAC,6BAAmB,EAAC,MAAM,EAAC,6BAAmB,EAAC;SAAC,CAAC,CAAA;IACrE,CAAC;CACJ;AAND,kCAMC"}
