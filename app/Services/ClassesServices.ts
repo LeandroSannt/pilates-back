@@ -39,11 +39,15 @@ export default class GangsServices extends BaseServices {
     }
   }
 
-  async storeClassGangsService({gangs,name,student_id}:StoreClasseGang){
+  async storeClassGangsService({gangs,student_id}:StoreClasseGang){
+
+    const nameClasse = gangs.map((classe) =>{
+      return classe.day
+    })
 
     //criar turma com name
     const classe = await ClasseGang.create({
-      name,
+      name:nameClasse.toString(),
       status:'ativo'
     })
 

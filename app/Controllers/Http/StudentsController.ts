@@ -57,4 +57,13 @@ export default class StudentsController extends BaseController  {
 
     return response.status(result.status).json(result.data)
   }
+
+  async studentsbirthDate({response,request}:HttpContextContract){
+    const month = request.input('month')
+
+    const studentService = new StudentsServices()
+    const result = await studentService.studentsbirthDate(month)
+
+    return response.status(result.status).json(result.data)
+  }
 }

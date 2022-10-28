@@ -142,4 +142,15 @@ export default class StudentsServices extends BaseServices {
         status:201,
       }
   }
+
+  async studentsbirthDate(month:number){
+    const birthDate = await Student.query()
+    .whereRaw('EXTRACT (MONTH FROM cast(birth_date as timestamp)) = ?', [month])
+    .whereNot('status','inativo')
+
+    return {
+      data:birthDate,
+      status:200
+    }
+  }
 }

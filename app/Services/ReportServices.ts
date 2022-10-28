@@ -84,9 +84,6 @@ export default class ReportServices {
     }
   }
 
-
-
-
   async donwloadPdfFinancial(){
       const pdfService = new PdfService()
       const pdf = await this.financialReport()

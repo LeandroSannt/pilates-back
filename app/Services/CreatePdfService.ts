@@ -89,33 +89,11 @@ export class PdfService{
        }
     }
 
-    //const chuncks:any = []
-
     const pdfDoc = pdf.createPdfKitDocument(docDefinitions)
-
-    //const filePath = Application.tmpPath(`reports/${moment().format('DDMMYYYYhhmm')}-report.pdf`)
-
-   // const c = pdfDoc.pipe(fs.createWriteStream(filePath))
-
-    // pdfDoc.on('data',(chunk) =>{
-    //   chuncks.push(chunk)
-    // })
-
-
-
-    // pdfDoc.on('end', () =>{
-    //   const result = Buffer.concat(chuncks)
-
-    //   response.header('Content-type', 'application/pdf')
-
-    //   response.send(result.toString('base64'))
-
-    //   return response.send(result)
-    // })
 
     pdfDoc.end()
 
-    // return c.path
+
 
 
   }

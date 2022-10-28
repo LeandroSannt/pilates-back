@@ -24,7 +24,7 @@ export default class CreateStudentValidator {
    *    ```
    */
   public schema = schema.create({
-    name:schema.string(),
+    name:schema.string.nullableAndOptional(),
     student_id:schema.array().members(schema.number([
       rules.exists({table:'students',column:"id"})
     ])),

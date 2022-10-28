@@ -40,6 +40,7 @@ Route.group(() =>{
   Route.get('/students', 'StudentsController.index')
   Route.get('/students/paginated', 'StudentsController.listStudentPaginated')
   Route.get('/students/:id', 'StudentsController.show')
+  Route.get('/studentsbirth/birthDate', 'StudentsController.studentsbirthDate')
   Route.post('students/', 'StudentsController.store')
   Route.put('/students/:id', 'StudentsController.update')
   Route.delete('/students/:id', 'StudentsController.destroy')
