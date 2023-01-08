@@ -35,6 +35,8 @@ export default class CreateStudentValidator {
     telephone:schema.string.nullableAndOptional(),
     telephone_emergency:schema.string.nullableAndOptional(),
     birth_date:schema.string.nullableAndOptional(),
+    month_birth:schema.string.nullableAndOptional(),
+    day_birth:schema.string.nullableAndOptional(),
     objective:schema.string.nullableAndOptional(),
 
     plan_id:schema.number([

@@ -35,26 +35,17 @@ export default class WatichingCurrentMonth extends BaseTask {
 
       if(moment(student.plan_expiration_day).format('DD') === current_day){
         if(Number(student.current_month_plan) === student.plan.amount_installments){
-          console.log('primeiro')
-
-          //se a quantdade de meses for iguaal ao total de meses coloque a vencer
           await Student
           .query()
           .where('id', student.id)
           .update('status', 'a vencer')
         }else if(Number(student.current_month_plan) < student.plan.amount_installments){
-          console.log('segundo')
-
-          //se o a quantidade de meses for menor que a quantidade total de meses do plano adiciona mais u
           await Student
           .query()
           .where('id', student.id)
           .update('current_month_plan', student.current_month_plan +=1)
 
         }else if(moment().format('DD/MM/YYYY') === tomorrowExpirationDate){
-          console.log('terceiro')
-
-          //se a data de hoje for igual a data de um dia depois do vencimento atualiza para vencido
           await Student
           .query()
           .where('id', student.id)

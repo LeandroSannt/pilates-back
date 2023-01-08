@@ -31,7 +31,8 @@ export default class UpdateStudentValidator {
     telephone_emergency:schema.string.nullableAndOptional(),
     birth_date:schema.string.nullableAndOptional(),
     objective:schema.string.nullableAndOptional(),
-
+    month_birth:schema.string.nullableAndOptional(),
+    day_birth:schema.string.nullableAndOptional(),
     plan_id:schema.number([
       rules.exists({table:'plans',column:"id"})
     ]),

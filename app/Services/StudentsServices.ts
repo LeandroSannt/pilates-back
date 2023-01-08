@@ -14,6 +14,8 @@ interface StoreStudent{
   objective?: string | null;
   plan_id: number;
   plan_expiration_day?: string | null;
+  month_birth?:string | null
+  day_birth?:string | null
 }
 
 export default class StudentsServices extends BaseServices {
@@ -46,7 +48,7 @@ export default class StudentsServices extends BaseServices {
     .orderBy([
       {
         column:'status',
-        order:'desc'
+        order:'asc'
       },
       {
         column:'id',
@@ -69,10 +71,13 @@ export default class StudentsServices extends BaseServices {
 
       if(current > expirationDate){
         await Student.query().where({id:student.id}).update({status:'vencido'})
+        studentExpiration.status = 'vencido'
       }else if( current > sevenDaysPrev  &&  current < expirationDate ){
         await Student.query().where({id:student.id}).update({status:'a vencer'})
+        studentExpiration.status = 'a vencer'
       }else{
         await Student.query().where({id:student.id}).update({status:'ativo'})
+        studentExpiration.status = 'ativo'
       }
       return studentExpiration
     }))
@@ -110,20 +115,11 @@ export default class StudentsServices extends BaseServices {
     if(student){
       const sevenAfeterDays =  moment(student.plan_expiration_day).subtract(7, 'days').format('DD/MM/YYYY')
       const currentDate = moment().format('DD/MM/YYYY')
-      if(currentDate > sevenAfeterDays){
         await Student.query().where({id}).update({
           ...data,
-         status:  'a vencer'
+         status: currentDate > sevenAfeterDays ?  'a vencer' : 'ativo'
         })
-      }else{
-        await Student.query().where({id}).update({
-          ...data,
-         status:  'ativo'
-        })
-      }
     }
-
-    //so posso atualizar para ativo se a data for menor que a dos 7 dias
 
     return {
       data:student,
@@ -143,10 +139,9 @@ export default class StudentsServices extends BaseServices {
       }
   }
 
-  async studentsbirthDate(month:number){
-    const birthDate = await Student.query()
-    .whereRaw('EXTRACT (MONTH FROM cast(birth_date as timestamp)) = ?', [month])
-    .whereNot('status','inativo')
+  async studentsbirthDate(month:string){
+      const birthDate = await Student.query()
+      .where({month_birth:month})
 
     return {
       data:birthDate,

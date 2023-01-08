@@ -46,6 +46,12 @@ export default class Student extends BaseModel {
   public plan_expiration_day: string
 
   @column()
+  public month_birth: string
+
+  @column()
+  public day_birth: string
+
+  @column()
   public current_month_plan: number
 
   @column()

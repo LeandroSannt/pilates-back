@@ -14,7 +14,7 @@ export default class extends BaseSchema {
       table.string('birth_date')
       table.integer('plan_id').notNullable().unsigned().references('id').inTable('plans')
       table.string('plan_expiration_day')
-      table.integer('current_month_plan').notNullable()
+      table.integer('current_month_plan')
       table.text('objective')
       table.enum('status',['ativo','inativo','a vencer','vencido'])
 
