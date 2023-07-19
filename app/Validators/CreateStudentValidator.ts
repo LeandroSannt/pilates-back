@@ -1,5 +1,5 @@
-import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { CustomMessages, rules, schema } from '@ioc:Adonis/Core/Validator'
+import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
+import { CustomMessages, rules, schema } from "@ioc:Adonis/Core/Validator";
 
 export default class CreateStudentValidator {
   constructor(protected ctx: HttpContextContract) {}
@@ -24,29 +24,22 @@ export default class CreateStudentValidator {
    *    ```
    */
   public schema = schema.create({
-     name:schema.string(),
-    registration:schema.string({},[
-      rules.unique({ table: 'students', column: 'registration' })
-    ]),
-    email:schema.string.nullableAndOptional({},[
+    name: schema.string(),
+
+    email: schema.string.nullableAndOptional({}, [
       rules.email(),
-      rules.unique({ table: 'students', column: 'email' })
+      rules.unique({ table: "students", column: "email" }),
     ]),
-    telephone:schema.string.nullableAndOptional(),
-    telephone_emergency:schema.string.nullableAndOptional(),
-    birth_date:schema.string.nullableAndOptional(),
-    month_birth:schema.string.nullableAndOptional(),
-    day_birth:schema.string.nullableAndOptional(),
-    objective:schema.string.nullableAndOptional(),
+    telephone: schema.string.nullableAndOptional(),
+    telephone_emergency: schema.string.nullableAndOptional(),
+    birth_date: schema.string.nullableAndOptional(),
+    month_birth: schema.string.nullableAndOptional(),
+    day_birth: schema.string.nullableAndOptional(),
+    objective: schema.string.nullableAndOptional(),
 
-    plan_id:schema.number([
-      rules.exists({table:'plans',column:"id"})
-    ]),
-    plan_expiration_day:schema.string.nullableAndOptional(),
-  })
-
-
-
+    plan_id: schema.number([rules.exists({ table: "plans", column: "id" })]),
+    plan_expiration_day: schema.string.nullableAndOptional(),
+  });
 
   /**
    * Custom messages for validation failures. You can make use of dot notation `(.)`
@@ -59,5 +52,5 @@ export default class CreateStudentValidator {
    * }
    *
    */
-  public messages: CustomMessages = {}
+  public messages: CustomMessages = {};
 }

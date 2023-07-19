@@ -19,67 +19,93 @@
 
 */
 
+import Route from "@ioc:Adonis/Core/Route";
 
-import Route from '@ioc:Adonis/Core/Route';
+Route.group(() => {
+  Route.resource("plans", "PlansController").except(["create", "edit"]);
+  Route.get("/plans/:id/expiry-period", "PlansController.getExpiryPeriod");
+});
 
-Route.resource('plans', 'PlansController').except(['create', 'edit'])
+Route.group(() => {
+  Route.get("/gangs", "GangsController.index");
+  Route.get("/gangs/:id", "GangsController.show");
+  Route.post("/gangs/", "GangsController.store");
+  Route.put("/gangs/:id", "GangsController.update");
+  Route.delete("/gangs/:id", "GangsController.destroy");
+  Route.post("/gangs/store-many", "GangsController.storeMany");
+  Route.get(
+    "/gangStudents/get-gang-students",
+    "GangsController.getGangsStudent"
+  );
+  Route.post(
+    "/gangStudents/add-gang-students",
+    "GangsController.addStudentGang"
+  );
+  Route.delete(
+    "/gangStudents/delete-gang-students",
+    "GangsController.deleteStudentGang"
+  );
+});
 
-Route.group(()=>{
-  Route.get('/gangs', 'GangsController.index')
-  Route.get('/gangs/:id', 'GangsController.show')
-  Route.post('/gangs/', 'GangsController.store')
-  Route.put('/gangs/:id', 'GangsController.update')
-  Route.delete('/gangs/:id', 'GangsController.destroy')
-  Route.post('/gangs/store-many', 'GangsController.storeMany')
-  Route.get('/gangStudents/get-gang-students', 'GangsController.getGangsStudent')
-  Route.post('/gangStudents/add-gang-students', 'GangsController.addStudentGang')
-  Route.delete('/gangStudents/delete-gang-students', 'GangsController.deleteStudentGang')
-})
+Route.group(() => {
+  Route.get("/students", "StudentsController.index");
+  Route.get("/students/paginated", "StudentsController.listStudentPaginated");
+  Route.get("/students/:id", "StudentsController.show");
+  Route.get("/studentsbirth/birthDate", "StudentsController.studentsbirthDate");
+  Route.post("students/", "StudentsController.store");
+  Route.put("/students/:id", "StudentsController.update");
+  Route.delete("/students/:id", "StudentsController.destroy");
+  Route.put("/students/:id/updateStatus", "StudentsController.updateStudent");
+  Route.post(
+    "/students/store-current-month",
+    "StudentsController.storeStudent"
+  );
+  Route.patch(
+    "/students/renovation-plan/:student_id",
+    "StudentsController.renovationPlan"
+  );
+});
 
-Route.group(() =>{
-  Route.get('/students', 'StudentsController.index')
-  Route.get('/students/paginated', 'StudentsController.listStudentPaginated')
-  Route.get('/students/:id', 'StudentsController.show')
-  Route.get('/studentsbirth/birthDate', 'StudentsController.studentsbirthDate')
-  Route.post('students/', 'StudentsController.store')
-  Route.put('/students/:id', 'StudentsController.update')
-  Route.delete('/students/:id', 'StudentsController.destroy')
-  Route.put('/students/:id/updateStatus', 'StudentsController.updateStudent')
-  Route.post('/students/store-current-month', 'StudentsController.storeStudent')
-  Route.patch('/students/renovation-plan', 'StudentsController.renovationPlan')
-})
+Route.group(() => {
+  Route.put("/files", "FilesController.updateFileStudant");
+});
 
-Route.group(() =>{
-  Route.put('/files', 'FilesController.updateFileStudant')
-})
+Route.group(() => {
+  Route.post("/gangLakes", "GangLacksController.store");
+  Route.get(
+    "/gangLakes/listPaginated",
+    "GangLacksController.listRelashionships"
+  );
+});
 
-Route.group(() =>{
-  Route.post('/gangLakes', 'GangLacksController.store')
-  Route.get('/gangLakes/listPaginated', 'GangLacksController.listRelashionships')
-})
+Route.group(() => {
+  Route.post("/exchanges", "StudentExchangesController.store");
+  Route.get(
+    "/exchanges/listPaginated",
+    "StudentExchangesController.listPaginated"
+  );
+  Route.get("/exchanges/list", "StudentExchangesController.list");
+  Route.patch("/exchanges/finish", "StudentExchangesController.finishExchange");
+  Route.patch(
+    "/exchanges/update-day",
+    "StudentExchangesController.updateDateExchange"
+  );
+  Route.post(
+    "/exchanges/update-cancel-gangs",
+    "StudentExchangesController.cancelGang"
+  );
+});
 
-Route.group(() =>{
-  Route.post('/exchanges', 'StudentExchangesController.store')
-  Route.get('/exchanges/listPaginated', 'StudentExchangesController.listPaginated')
-  Route.get('/exchanges/list', 'StudentExchangesController.list')
-  Route.patch('/exchanges/finish', 'StudentExchangesController.finishExchange')
-  Route.patch('/exchanges/update-day', 'StudentExchangesController.updateDateExchange')
-  Route.post('/exchanges/update-cancel-gangs', 'StudentExchangesController.cancelGang')
-})
+Route.group(() => {
+  Route.get("/report/financial", "ReportController.financial");
+  Route.get("/report/financial-download", "ReportController.downloadfinancial");
+});
 
-Route.group(() =>{
-  Route.get('/report/financial', 'ReportController.financial')
-  Route.get('/report/financial-download', 'ReportController.downloadfinancial')
-})
-
-
-Route.group(() =>{
-  Route.post('/classes/storeGangs', 'ClassesController.storeClassGangs').middleware('validateGang')
-  Route.get('/classes/getClasseGangs', 'ClassesController.getClassesGangs')
-  Route.post('/classes/store', 'ClassesController.store')
-})
-
-
-
-
-
+Route.group(() => {
+  Route.post(
+    "/classes/storeGangs",
+    "ClassesController.storeClassGangs"
+  ).middleware("validateGang");
+  Route.get("/classes/getClasseGangs", "ClassesController.getClassesGangs");
+  Route.post("/classes/store", "ClassesController.store");
+});
