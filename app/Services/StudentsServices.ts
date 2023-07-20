@@ -161,14 +161,6 @@ export default class StudentsServices extends BaseServices {
     const student = await Student.query().where({ id }).preload("plan").first();
 
     if (student) {
-      // student.date_start_plan = moment().format();
-      // student.status = "ativo";
-      // student.plan_expiration_day = moment(student.plan_expiration_day)
-      //   .add(student.plan.amount_installments, "months")
-      //   .format("YYYY-MM-DD");
-
-      // await student.save();
-
       const paymentReceived =
         student.plan.value * student.plan.amount_installments;
       const paymentReceivedInterest = paymentWithFees(

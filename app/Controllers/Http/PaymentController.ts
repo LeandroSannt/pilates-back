@@ -14,12 +14,25 @@ export default class StudentsController extends BaseController {
     });
   }
 
-  async getPaymentsByStudent({ response, params }: HttpContextContract) {
+  async getPaymentsByStudent({
+    response,
+    request,
+    params,
+  }: HttpContextContract) {
     const paymentService = new PaymentServices();
 
     const { student_id } = params;
 
-    const result = await paymentService.getPaymentsByStudent(student_id);
+    const { finalDate, initialDate } = request.only([
+      "initialDate",
+      "finalDate",
+    ]);
+
+    const result = await paymentService.getPaymentsByStudent(
+      student_id,
+      initialDate,
+      finalDate
+    );
 
     return response.ok(result);
   }
