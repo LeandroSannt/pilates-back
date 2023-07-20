@@ -13,6 +13,9 @@ export default class Payment extends BaseModel {
   public student_id: number;
 
   @column()
+  public type_payment: string;
+
+  @column()
   public payment_with_machine_interest: number;
 
   @hasMany(() => Student, { foreignKey: "student_id" })

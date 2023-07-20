@@ -180,6 +180,7 @@ export default class StudentsServices extends BaseServices {
       await student.related("payment").create({
         payment: student.plan.value * student.plan.amount_installments,
         payment_with_machine_interest: paymentReceivedInterest,
+        type_payment: typeTransaction,
       });
 
       return {

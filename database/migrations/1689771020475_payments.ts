@@ -8,6 +8,7 @@ export default class extends BaseSchema {
       table.increments("id");
       table.integer("payment").notNullable();
       table.float("payment_with_machine_interest").notNullable();
+      table.string("type_payment").notNullable();
 
       table
         .integer("student_id")

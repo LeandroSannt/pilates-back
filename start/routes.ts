@@ -26,6 +26,13 @@ Route.group(() => {
   Route.get("/plans/:id/expiry-period", "PlansController.getExpiryPeriod");
 });
 
+Route.resource("payments", "PaymentController").except(["create", "edit"]);
+
+Route.get(
+  "/payment/:student_id/students",
+  "PaymentController.getPaymentsByStudent"
+);
+
 Route.group(() => {
   Route.get("/gangs", "GangsController.index");
   Route.get("/gangs/:id", "GangsController.show");
