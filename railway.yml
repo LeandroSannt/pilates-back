@@ -7,8 +7,8 @@ services:
     config:
       version: "8.0"
       username: root
-      password: mysql@123
-      database: pilates_back
+      password: 07sMrrUI4zEsX7jNYdZe
+      database: railway
 
 build:
   env: production
@@ -22,7 +22,7 @@ env:
   PORT: "3333"
 
 secrets:
-  DB_PASSWORD: "mysql@123"
+  DB_PASSWORD: "07sMrrUI4zEsX7jNYdZe"
 
 plugins:
   - name: "@railway/plugin-node"

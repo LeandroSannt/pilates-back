@@ -54,7 +54,7 @@ export default class GangsController extends BaseController {
     return response.status(result.status).json(result.data);
   }
 
-  async teste({ request, response }: HttpContextContract) {
+  async teste({ response }: HttpContextContract) {
     return response.json({ ok: true });
   }
 }
