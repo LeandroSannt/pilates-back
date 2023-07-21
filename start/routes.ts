@@ -21,6 +21,8 @@
 
 import Route from "@ioc:Adonis/Core/Route";
 
+Route.get("/gangs/teste", "GangsController.teste");
+
 Route.group(() => {
   Route.resource("plans", "PlansController").except(["create", "edit"]);
   Route.get("/plans/:id/expiry-period", "PlansController.getExpiryPeriod");

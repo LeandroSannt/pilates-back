@@ -1,0 +1,29 @@
+version: 1
+name: pilates-backend
+
+services:
+  - name: banco-de-dados
+    type: mysql
+    config:
+      version: "8.0"
+      username: root
+      password: mysql@123
+      database: pilates_back
+
+build:
+  env: production
+
+routes:
+  - src: ./api
+    dest: "src/api"
+
+env:
+  NODE_ENV: "production"
+  PORT: "3333"
+
+secrets:
+  DB_PASSWORD: "mysql@123"
+
+plugins:
+  - name: "@railway/plugin-node"
+    version: "1.1.0"

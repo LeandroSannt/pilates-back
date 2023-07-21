@@ -19,6 +19,8 @@ export default class FilesController {
     try {
       // const i = await files?.moveToDisk('pilates',{},'s3')
       const i = await postData.file.moveToDisk("teste", {}, "s3");
+
+      console.log(i);
     } catch (err) {
       console.log(err);
     }
